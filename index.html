@@ -6,10 +6,21 @@
 <title>MediDrive — Client Phone Directory</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <style>
-  :root{--bg:#ffffff;--bg2:#f5f5f3;--bg3:#eeede9;--text:#1a1a18;--text2:#6b6b67;--text3:#9b9b97;--border:rgba(0,0,0,0.12);--border2:rgba(0,0,0,0.2);--radius:8px;--radius-lg:12px;--font:'Segoe UI',system-ui,sans-serif}
-  @media(prefers-color-scheme:dark){:root{--bg:#1c1c1a;--bg2:#262624;--bg3:#2e2e2c;--text:#f0efeb;--text2:#9b9b97;--text3:#6b6b67;--border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.2)}}
+  :root {
+    --bg:#ffffff;--bg2:#f5f5f3;--bg3:#eeede9;
+    --text:#1a1a18;--text2:#6b6b67;--text3:#9b9b97;
+    --border:rgba(0,0,0,0.12);--border2:rgba(0,0,0,0.2);
+    --radius:8px;--radius-lg:12px;--font:'Segoe UI',system-ui,sans-serif;
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#1c1c1a;--bg2:#262624;--bg3:#2e2e2c;
+    --text:#f0efeb;--text2:#9b9b97;--text3:#6b6b67;
+    --border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.2);
+  }}
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:var(--font);background:var(--bg3);color:var(--text);min-height:100vh}
+
+  /* Login */
   .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg3)}
   .login-card{background:var(--bg);border:0.5px solid var(--border2);border-radius:var(--radius-lg);padding:2.5rem 2rem;width:100%;max-width:380px;text-align:center}
   .login-logo{font-size:32px;color:#185FA5;margin-bottom:1rem}
@@ -20,6 +31,8 @@
   .login-btn{width:100%;padding:11px;border-radius:var(--radius);border:none;background:#185FA5;color:#fff;font-size:15px;font-family:var(--font);font-weight:600;cursor:pointer;margin-top:4px}
   .login-btn:hover{background:#0C447C}
   .login-error{font-size:13px;color:#A32D2D;margin-top:10px;min-height:18px}
+
+  /* Header */
   .header{background:var(--bg);border-bottom:0.5px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:10}
   .header-left{display:flex;align-items:center;gap:10px}
   .header-left i{font-size:22px;color:#185FA5}
@@ -28,13 +41,10 @@
   .role-badge{font-size:11px;padding:3px 10px;border-radius:100px;font-weight:600}
   .role-admin{background:#E6F1FB;color:#0C447C}
   .role-viewer{background:#EAF3DE;color:#3B6D11}
-  .sync-indicator{font-size:12px;color:var(--text2);display:flex;align-items:center;gap:5px}
-  .sync-dot{width:7px;height:7px;border-radius:50%;background:#9b9b97;flex-shrink:0}
-  .sync-dot.saving{background:#F59E0B}
-  .sync-dot.saved{background:#10B981}
-  .sync-dot.error{background:#EF4444}
   .logout-btn{background:none;border:0.5px solid var(--border2);border-radius:var(--radius);padding:5px 12px;font-size:13px;color:var(--text2);cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:5px}
   .logout-btn:hover{background:var(--bg2);color:var(--text)}
+
+  /* Main */
   .main{max-width:1200px;margin:0 auto;padding:1.5rem 1.5rem 3rem}
   .toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:1rem}
   .search-wrap{position:relative;flex:1;min-width:220px}
@@ -46,10 +56,14 @@
   .btn:hover{background:var(--bg2)}
   .btn-primary{background:#185FA5;color:#fff;border-color:#185FA5}
   .btn-primary:hover{background:#0C447C;border-color:#0C447C}
+
+  /* Stats */
   .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px;margin-bottom:1.25rem}
   .stat{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:12px 16px}
   .stat-n{font-size:24px;font-weight:600;color:var(--text);line-height:1}
   .stat-l{font-size:12px;color:var(--text2);margin-top:4px}
+
+  /* Client cards */
   .client-card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:10px;overflow:hidden}
   .client-head{display:flex;justify-content:space-between;align-items:center;padding:13px 1.25rem;cursor:pointer;user-select:none}
   .client-head:hover{background:var(--bg2)}
@@ -63,6 +77,8 @@
   .icon-btn:hover{color:var(--text);background:var(--bg3)}
   .chevron{font-size:16px;color:var(--text2);transition:transform 0.2s}
   .chevron.open{transform:rotate(180deg)}
+
+  /* Lines table */
   .lines-body{border-top:0.5px solid var(--border)}
   .col-head{display:grid;grid-template-columns:150px 88px 140px 110px 1fr 120px 1fr 36px;gap:10px;padding:7px 1.25rem;font-size:11px;color:var(--text3);background:var(--bg2);border-bottom:0.5px solid var(--border);text-transform:uppercase;letter-spacing:0.04em}
   .line-row{display:grid;grid-template-columns:150px 88px 140px 110px 1fr 120px 1fr 36px;gap:10px;align-items:start;padding:12px 1.25rem;border-bottom:0.5px solid var(--border);font-size:13px}
@@ -80,10 +96,14 @@
   .add-line-row{padding:9px 1.25rem;display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text2);cursor:pointer;border-top:0.5px solid var(--border)}
   .add-line-row:hover{background:var(--bg2);color:var(--text)}
   .empty{text-align:center;padding:3rem 1rem;color:var(--text2);font-size:14px}
+
+  /* Status checkboxes in line card */
   .status-flags{display:flex;flex-direction:column;gap:4px;align-items:flex-start}
   .flag{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:2px 7px;border-radius:100px;white-space:nowrap;line-height:1.6}
   .flag-on{background:#E1F5EE;color:#0F6E56}
   .flag-off{background:#f5f5f3;color:#9b9b97;border:0.5px solid var(--border)}
+
+  /* Modal */
   .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;z-index:200;padding:1rem}
   .overlay.hidden{display:none}
   .modal{background:var(--bg);border-radius:var(--radius-lg);border:0.5px solid var(--border2);width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,0.18)}
@@ -107,8 +127,9 @@
   .pw-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .settings-section{margin-bottom:1.5rem}
   .settings-section h3{font-size:14px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:0.5px solid var(--border)}
-  .req-badge{background:#E85D3A;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:100px;margin-left:4px;vertical-align:middle}
-  .modal-wide{max-width:680px}
+
+  /* Queue */
+  .queue-modal .modal{max-width:720px}
   .queue-tabs{display:flex;gap:2px;padding:0 1.25rem;border-bottom:0.5px solid var(--border);background:var(--bg2)}
   .qtab{padding:10px 16px;font-size:13px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;color:var(--text2);background:none;border-top:none;border-left:none;border-right:none;font-family:var(--font)}
   .qtab.active{color:#185FA5;border-bottom-color:#185FA5}
@@ -129,21 +150,14 @@
   .btn-decline{padding:5px 12px;border-radius:var(--radius);border:0.5px solid rgba(163,45,45,0.4);background:#FCEBEB;color:#A32D2D;font-size:12px;font-family:var(--font);cursor:pointer;font-weight:600}
   .btn-decline:hover{background:#F9D5D5}
   .queue-empty{text-align:center;padding:2.5rem 1rem;color:var(--text2);font-size:13px}
-  .loading-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--text2);font-size:14px}
-  .spinner{width:32px;height:32px;border:3px solid var(--border2);border-top-color:#185FA5;border-radius:50%;animation:spin 0.7s linear infinite}
-  @keyframes spin{to{transform:rotate(360deg)}}
+  .req-badge{background:#E85D3A;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:100px;margin-left:4px;vertical-align:middle}
+  .modal-wide{max-width:680px}
 </style>
 </head>
 <body>
 
-<!-- Loading screen -->
-<div id="loading-screen" class="loading-wrap">
-  <div class="spinner"></div>
-  <span>Loading directory…</span>
-</div>
-
 <!-- Login -->
-<div id="login-screen" class="login-wrap hidden">
+<div id="login-screen" class="login-wrap">
   <div class="login-card">
     <div class="login-logo"><i class="ti ti-ambulance"></i></div>
     <div class="login-title">MediDrive</div>
@@ -162,10 +176,6 @@
       <span class="header-title">MediDrive — Phone Directory</span>
     </div>
     <div class="header-right">
-      <div class="sync-indicator" id="sync-indicator">
-        <div class="sync-dot" id="sync-dot"></div>
-        <span id="sync-label">Synced</span>
-      </div>
       <span class="role-badge" id="role-badge"></span>
       <button class="btn" id="settings-btn" onclick="openSettings()" style="display:none"><i class="ti ti-settings"></i> Settings</button>
       <button class="btn" id="queue-btn" onclick="openQueue()" style="display:none"><i class="ti ti-list-check"></i> Requests<span class="req-badge hidden" id="req-badge">0</span></button>
@@ -203,7 +213,10 @@
       <div class="field"><label>Client</label><select id="lf-client"></select></div>
       <div class="section-label">Line details</div>
       <div class="field"><label>Line label *</label><input id="lf-label" type="text" placeholder="e.g. Main scheduling, Medicaid trips"></div>
-      <div class="field"><label>Phone number *</label><input id="lf-number" type="tel" placeholder="(xxx) xxx-xxxx" oninput="formatPhone(this)" maxlength="14"></div>
+      <div class="field">
+        <label>Phone number *</label>
+        <input id="lf-number" type="tel" placeholder="(xxx) xxx-xxxx" oninput="formatPhone(this)" maxlength="14">
+      </div>
       <div class="field"><label>Number type</label><select id="lf-type"><option>Toll-Free</option><option>Local</option></select></div>
       <div class="field">
         <label>Status</label>
@@ -265,190 +278,86 @@
       <button class="btn" onclick="closeModal('settings-overlay')">Cancel</button>
       <button class="btn btn-primary" onclick="saveSettings()"><i class="ti ti-check"></i> Save passwords</button>
     </div>
-  </div>
-</div>
-
-<!-- Request a Line Modal -->
-<div class="overlay hidden" id="request-overlay" onclick="overlayClick(event,'request-overlay')">
-  <div class="modal modal-wide" role="dialog" aria-modal="true">
-    <div class="modal-head">
-      <h2><i class="ti ti-phone-plus" style="font-size:15px;vertical-align:-2px;margin-right:6px;color:#185FA5"></i>Request a new telephone line</h2>
-      <button class="icon-btn" onclick="closeModal('request-overlay')" aria-label="Close"><i class="ti ti-x"></i></button>
-    </div>
-    <div class="modal-body">
-      <div class="field"><label>Your name *</label><input id="rq-name" type="text" placeholder="First and last name"></div>
-      <div class="field"><label>Client / account this line is for *</label><select id="rq-client"><option value="">— Select client —</option></select></div>
-      <div class="field"><label>Line label / purpose *</label><input id="rq-label" type="text" placeholder="e.g. Medicaid scheduling, Dispatch overflow"></div>
-      <div class="field"><label>Preferred number type</label><select id="rq-type"><option value="Toll-Free">Toll-Free</option><option value="Local">Local</option><option value="Either">No preference</option></select></div>
-      <div class="field"><label>Preferred area code (if local)</label><input id="rq-area" type="text" placeholder="e.g. 703, 303" maxlength="3" oninput="this.value=this.value.replace(/\D/g,'')"></div>
-      <div class="field"><label>Business justification *</label><textarea id="rq-reason" placeholder="Why is this line needed? What call volume is expected?"></textarea></div>
-      <div class="field"><label>Urgency</label><select id="rq-urgency"><option value="Normal">Normal — within 2 weeks</option><option value="Urgent">Urgent — within 3 days</option><option value="Critical">Critical — ASAP</option></select></div>
-      <div class="field"><label>Additional notes</label><textarea id="rq-notes" placeholder="IVR requirements, forwarding needs…" style="min-height:70px"></textarea></div>
-    </div>
-    <div class="modal-foot">
-      <button class="btn" onclick="closeModal('request-overlay')">Cancel</button>
-      <button class="btn btn-primary" onclick="submitRequest()"><i class="ti ti-send"></i> Submit request</button>
-    </div>
-  </div>
-</div>
-
-<!-- Queue Modal -->
-<div class="overlay hidden" id="queue-overlay" onclick="overlayClick(event,'queue-overlay')">
-  <div class="modal modal-wide" role="dialog" aria-modal="true">
-    <div class="modal-head">
-      <h2><i class="ti ti-list-check" style="font-size:15px;vertical-align:-2px;margin-right:6px;color:#185FA5"></i>Line Request Queue</h2>
-      <button class="icon-btn" onclick="closeModal('queue-overlay')" aria-label="Close"><i class="ti ti-x"></i></button>
-    </div>
-    <div class="queue-tabs">
-      <button class="qtab active" id="qtab-pending" onclick="switchQTab('pending')">Pending <span id="pending-count"></span></button>
-      <button class="qtab" id="qtab-approved" onclick="switchQTab('approved')">Approved</button>
-      <button class="qtab" id="qtab-declined" onclick="switchQTab('declined')">Declined</button>
-      <button class="qtab" id="qtab-all" onclick="switchQTab('all')">All</button>
-    </div>
-    <div class="queue-list" id="queue-list"></div>
-    <div class="modal-foot" style="justify-content:space-between">
-      <button class="btn" onclick="exportRequests()"><i class="ti ti-download"></i> Export requests</button>
-      <button class="btn" onclick="closeModal('queue-overlay')">Close</button>
-    </div>
-  </div>
-</div>
-
-<!-- Admin reply modal -->
-<div class="overlay hidden" id="reply-overlay" onclick="overlayClick(event,'reply-overlay')">
-  <div class="modal" role="dialog" aria-modal="true">
-    <div class="modal-head">
-      <h2 id="reply-modal-title">Respond to request</h2>
-      <button class="icon-btn" onclick="closeModal('reply-overlay')" aria-label="Close"><i class="ti ti-x"></i></button>
-    </div>
-    <div class="modal-body">
-      <div id="reply-summary" style="background:var(--bg2);border-radius:var(--radius);padding:12px;margin-bottom:1rem;font-size:13px;color:var(--text2);line-height:1.7"></div>
-      <div class="field"><label>Admin notes / response</label><textarea id="reply-notes" placeholder="Add a note or internal response…" style="min-height:80px"></textarea></div>
-    </div>
-    <div class="modal-foot">
-      <button class="btn" onclick="closeModal('reply-overlay')">Cancel</button>
-      <button class="btn btn-decline" id="reply-decline-btn" onclick="resolveRequest('declined')"><i class="ti ti-x"></i> Decline</button>
-      <button class="btn btn-approve" id="reply-approve-btn" onclick="resolveRequest('approved')"><i class="ti ti-check"></i> Approve</button>
-    </div>
+    <div style="padding:0 1.25rem 1rem;font-size:12px;color:var(--text3)">After saving, use Export to download the updated file and re-upload to SharePoint to make changes permanent.</div>
   </div>
 </div>
 
 <script>
-// ── JSONBin config ──
-const BIN_ID   = '6a260352f5f4af5e29c86b17';
-const API_KEY  = '$2a$10$ubQgTILD7oeHgCBojYwS1.BwyLc.2GvPEbeDFoboLGmUcarZiWYm6';
-const BIN_URL  = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
-const HEADERS  = {'Content-Type':'application/json','X-Master-Key':API_KEY,'X-Bin-Versioning':'false'};
-
-// ── Passwords ──
 let PASSWORDS = { admin: 'MediDrive2025!', viewer: 'MDViewer2025' };
 let currentRole = null;
-let editLineId = null, editClientId = null, replyRequestId = null;
-let expanded = {}, activeQTab = 'pending';
-let saveTimer = null;
+let editLineId = null, editClientId = null;
+let expanded = {};
+let requests = [];
+let activeQTab = 'pending';
+let replyRequestId = null;
 
 const avatarPalettes = [
   ['#E6F1FB','#185FA5'],['#E1F5EE','#0F6E56'],['#FAEEDA','#854F0B'],
   ['#FBEAF0','#993556'],['#EAF3DE','#3B6D11'],['#F5C4B3','#993C1D']
 ];
 
-// ── Default data (used only if bin is empty) ──
-const DEFAULT_CLIENTS = [
+const urgencyColor = {Normal:'color:var(--text2)', Urgent:'color:#854F0B', Critical:'color:#A32D2D'};
+const urgencyIcon = {Normal:'ti-clock', Urgent:'ti-alert-triangle', Critical:'ti-alert-circle'};
+
+function updateReqBadge(){
+  const pending=requests.filter(r=>r.status==='pending').length;
+  const badge=document.getElementById('req-badge');
+  if(pending>0){badge.textContent=pending;badge.classList.remove('hidden');}
+  else badge.classList.add('hidden');
+}
+
+// ── Phone formatting ──
+function formatPhone(input) {
+  let v = input.value.replace(/\D/g,'');
+  if(v.length === 0){ input.value=''; return; }
+  if(v.length <= 3) input.value = '('+v;
+  else if(v.length <= 6) input.value = '('+v.slice(0,3)+') '+v.slice(3);
+  else input.value = '('+v.slice(0,3)+') '+v.slice(3,6)+'-'+v.slice(6,10);
+}
+
+// ── Data ──
+let clients = [
   {id:1,name:"MediDrive",region:"Virginia",notes:"Internal MediDrive lines"},
   {id:2,name:"Aetna VA",region:"Virginia",notes:"Aetna Better Health of Virginia"},
   {id:3,name:"Atrio",region:"Oregon",notes:"ATRIO Health Plans"},
   {id:4,name:"Health First Colorado",region:"Colorado",notes:"HFCO lines ported from Transdev"}
 ];
-const DEFAULT_LINES = [
-  {id:1,clientId:1,label:"Main Company Line",number:"(703) 372-9815",type:"Local",available:true,forwarding:false,ivr:"Thank you for calling Medidrive. If you are experiencing a medical emergency, please hang up and dial 911. If you are a member or a facility calling regarding transportation-related services or transportation-related forms, please contact your standard transportation number for immediate support. If you require other assistance, please stay on the line, or enter the extension of the person you are trying to reach. All calls are monitored and recorded for quality assurance purposes.",ivrlink:"",notes:""},
-  {id:2,clientId:1,label:"Strive Health",number:"(303) 970-3554",type:"Local",available:true,forwarding:false,ivr:"Thank you for calling MediDrive. For English, press 1. Para español, oprima el número 2. If you are experiencing a medical emergency, please hang up and dial 911. All calls are monitored and recorded for quality assurance purposes.",ivrlink:"",notes:""},
-  {id:3,clientId:1,label:"Facility Line",number:"(703) 372-9832",type:"Local",available:true,forwarding:false,ivr:"Thank you for calling the MediDrive Facility Line. If you are experiencing a medical emergency, please hang up and dial 911. Facilities can schedule transportation through the MediDrive Facility Portal. To request access, please visit facility.medidrive.com. Once registered, you can schedule transportation for members' upcoming appointments. Please stay on the line for the next available representative. All calls are monitored and recorded for quality assurance purposes.",ivrlink:"",notes:"CSR"},
-  {id:4,clientId:1,label:"Claims VA",number:"(833) 633-4374",type:"Toll-Free",available:true,forwarding:false,ivr:"Thank you for calling the MediDrive Claims Line. If you are experiencing a medical emergency, please hang up and dial 911. This line is for transportation claims and reimbursement inquiries, including mileage reimbursement, public transit reimbursements, and ALS or BLS transportation claims. If you are calling to check the status of a claim, please allow up to 30 days for processing. If you are calling after business hours, please leave a message and a representative will contact you on the next business day. You may also reach us by email at claimsva@medidrive.com. Please stay on the line, and the next available representative will assist you. All calls are monitored and recorded for quality assurance purposes.",ivrlink:"",notes:"RICHARD"},
-  {id:5,clientId:1,label:"Dispatch",number:"(703) 714-6940",type:"Local",available:true,forwarding:false,ivr:"Thank you for calling the MediDrive Provider Dispatch Line. If you are experiencing a medical emergency, please hang up and dial 911. For non-urgent trip issues, please email DispatchVA@medidrive.com. For urgent trip support or discharge transportation issues, please stay on the line for the next available representative. All calls are monitored and recorded for quality assurance purposes.",ivrlink:"",notes:"RICHARD"},
-  {id:6,clientId:1,label:"Porting (Reserved)",number:"(303) 970-3553",type:"Local",available:false,forwarding:false,ivr:"",ivrlink:"",notes:"Was going to be used for porting"},
-  {id:7,clientId:2,label:"Medicaid",number:"(800) 734-0430",type:"Toll-Free",available:true,forwarding:true,ivr:"Thank you for calling Aetna Better Health of Virginia Transportation Services. For English, press 1. Para español, oprima el número 2. If you are experiencing a medical emergency, please hang up and dial 911. Calls may be monitored or recorded for quality assurance purposes. If you are calling to schedule a ride, press 1. If you are calling for ride assistance, press 2.",ivrlink:"",notes:"Porting initiated by Modivcare team. Target takeover 3/16."},
-  {id:8,clientId:2,label:"FIDE",number:"(844) 452-9375",type:"Toll-Free",available:true,forwarding:true,ivr:"Thank you for calling Aetna Better Health of Virginia Transportation Services. For English, press 1. Para español, oprima el número 2. If you are experiencing a medical emergency, please hang up and dial 911. Calls may be monitored or recorded for quality assurance purposes. If you are calling to schedule a ride, press 1. If you are calling for ride assistance, press 2.",ivrlink:"",notes:"Porting initiated by Modivcare team. Target takeover 3/16."},
-  {id:9,clientId:2,label:"Exceptions Line",number:"(877) 564-5658",type:"Toll-Free",available:false,forwarding:false,ivr:"",ivrlink:"",notes:"This line has been rolled into the Medicaid Line"},
-  {id:10,clientId:3,label:"Main Line",number:"(888) 617-0467",type:"Toll-Free",available:true,forwarding:false,ivr:"Thank you for calling ATRIO Health Plans Transportation Services. For English, press 1. Para español, oprima el número 2. If you are experiencing a medical emergency, please hang up and dial 911. Calls may be monitored or recorded for quality assurance purposes. If you are calling to schedule a ride, press 1. If you are calling for ride assistance, press 2.",ivrlink:"",notes:"Porting process to be initiated by Atrio"},
-  {id:11,clientId:3,label:"Transfer Number",number:"(703) 714-6942",type:"Local",available:true,forwarding:false,ivr:"Thank you for calling ATRIO Health Plans Transportation Services. For English, press 1. Para español, oprima el número 2. If you are experiencing a medical emergency, please hang up and dial 911. Calls may be monitored or recorded for quality assurance purposes. If you are calling to schedule a ride, press 1. If you are calling for ride assistance, press 2.",ivrlink:"",notes:"Open Monday–Friday, 6:00 AM to 5:00 PM PST."},
-  {id:12,clientId:3,label:"Facility Line",number:"(503) 389-8465",type:"Local",available:true,forwarding:false,ivr:"Thank you for calling the MediDrive Facility Line. If you are experiencing a medical emergency, please hang up and dial 911. Please stay on the line for the next available representative. All calls are monitored and recorded for quality assurance purposes.",ivrlink:"",notes:""},
-  {id:13,clientId:4,label:"HFCO General",number:"(855) 489-4999",type:"Toll-Free",available:true,forwarding:false,ivr:"",ivrlink:"",notes:""},
-  {id:14,clientId:4,label:"Book a Ride — Denver",number:"(303) 398-2155",type:"Local",available:true,forwarding:false,ivr:"",ivrlink:"",notes:"Ported from Transdev"},
-  {id:15,clientId:4,label:"Book a Ride — Ft Collins",number:"(970) 225-4850",type:"Local",available:true,forwarding:false,ivr:"",ivrlink:"",notes:"Ported from Transdev"},
-  {id:16,clientId:4,label:"Book a Ride — Colorado Springs",number:"(719) 766-4660",type:"Local",available:true,forwarding:false,ivr:"",ivrlink:"",notes:"Ported from Transdev"},
-  {id:17,clientId:4,label:"HFCO Facility",number:"(720) 452-3025",type:"Local",available:true,forwarding:false,ivr:"",ivrlink:"",notes:""},
-  {id:18,clientId:4,label:"HFCO Dispatch",number:"(720) 844-9615",type:"Local",available:true,forwarding:false,ivr:"",ivrlink:"",notes:""},
-  {id:19,clientId:4,label:"HFCO Claims",number:"(720) 844-9610",type:"Local",available:true,forwarding:false,ivr:"",ivrlink:"",notes:""}
+
+let lines = [
+  {id:1, clientId:1,label:"Main Company Line",number:"(703) 372-9815",type:"Local",available:true,forwarding:false,ivr:"Thank you for calling Medidrive. If you are experiencing a medical emergency, please hang up and dial 911. If you are a member or a facility calling regarding transportation-related services or transportation-related forms, please contact your standard transportation number for immediate support. If you require other assistance, please stay on the line, or enter the extension of the person you are trying to reach. All calls are monitored and recorded for quality assurance purposes.",notes:""},
+  {id:2, clientId:1,label:"Strive Health",number:"(303) 970-3554",type:"Local",available:true,forwarding:false,ivr:"Thank you for calling MediDrive. For English, press 1. Para español, oprima el número 2. If you are experiencing a medical emergency, please hang up and dial 911. All calls are monitored and recorded for quality assurance purposes.",notes:""},
+  {id:3, clientId:1,label:"Facility Line",number:"(703) 372-9832",type:"Local",available:true,forwarding:false,ivr:"Thank you for calling the MediDrive Facility Line. If you are experiencing a medical emergency, please hang up and dial 911. Facilities can schedule transportation through the MediDrive Facility Portal. To request access, please visit facility.medidrive.com. Once registered, you can schedule transportation for members' upcoming appointments. Please stay on the line for the next available representative. All calls are monitored and recorded for quality assurance purposes.",notes:"CSR"},
+  {id:4, clientId:1,label:"Claims VA",number:"(833) 633-4374",type:"Toll-Free",available:true,forwarding:false,ivr:"Thank you for calling the MediDrive Claims Line. If you are experiencing a medical emergency, please hang up and dial 911. This line is for transportation claims and reimbursement inquiries, including mileage reimbursement, public transit reimbursements, and ALS or BLS transportation claims. If you are calling to check the status of a claim, please allow up to 30 days for processing. If you are calling after business hours, please leave a message and a representative will contact you on the next business day. You may also reach us by email at claimsva@medidrive.com. Please stay on the line, and the next available representative will assist you. All calls are monitored and recorded for quality assurance purposes.",notes:"RICHARD"},
+  {id:5, clientId:1,label:"Dispatch",number:"(703) 714-6940",type:"Local",available:true,forwarding:false,ivr:"Thank you for calling the MediDrive Provider Dispatch Line. If you are experiencing a medical emergency, please hang up and dial 911. For non-urgent trip issues, please email DispatchVA@medidrive.com. For urgent trip support or discharge transportation issues, please stay on the line for the next available representative. All calls are monitored and recorded for quality assurance purposes.",notes:"RICHARD"},
+  {id:6, clientId:1,label:"Porting (Reserved)",number:"(303) 970-3553",type:"Local",available:false,forwarding:false,ivr:"",notes:"Was going to be used for porting"},
+
+  {id:7, clientId:2,label:"Medicaid",number:"(800) 734-0430",type:"Toll-Free",available:true,forwarding:true,ivr:"Thank you for calling Aetna Better Health of Virginia Transportation Services. For English, press 1. Para español, oprima el número 2. If you are experiencing a medical emergency, please hang up and dial 911. Did you know you can skip this call and book and manage your ride in seconds? Download the MediDrive Mobile app and manage your trips anytime, anywhere. Search MediDrive in the App Store or Google Play. Calls may be monitored or recorded for quality assurance purposes. If you are calling to schedule a ride, press 1. If you are calling for ride assistance, press 2.",notes:"Porting initiated by Modivcare team. Target takeover 3/16. Temp IVR 3/16–3/31: If calling for a ride scheduled before April 1st or need immediate trip assistance, press 8. If calling for rides on or after April 1st, use menu options."},
+  {id:8, clientId:2,label:"FIDE",number:"(844) 452-9375",type:"Toll-Free",available:true,forwarding:true,ivr:"Thank you for calling Aetna Better Health of Virginia Transportation Services. For English, press 1. Para español, oprima el número 2. If you are experiencing a medical emergency, please hang up and dial 911. Calls may be monitored or recorded for quality assurance purposes. If you are calling to schedule a ride, press 1. If you are calling for ride assistance, press 2.",notes:"Porting initiated by Modivcare team. Target takeover 3/16. Temp IVR 3/16–3/31: same as Medicaid temp IVR."},
+  {id:9, clientId:2,label:"Exceptions Line",number:"(877) 564-5658",type:"Toll-Free",available:false,forwarding:false,ivr:"",notes:"This line has been rolled into the Medicaid Line"},
+
+  {id:10,clientId:3,label:"Main Line",number:"(888) 617-0467",type:"Toll-Free",available:true,forwarding:false,ivr:"Thank you for calling ATRIO Health Plans Transportation Services. For English, press 1. Para español, oprima el número 2. If you are experiencing a medical emergency, please hang up and dial 911. Calls may be monitored or recorded for quality assurance purposes. If you are calling to schedule a ride, press 1. If you are calling for ride assistance, press 2.",notes:"Porting process to be initiated by Atrio"},
+  {id:11,clientId:3,label:"Transfer Number",number:"(703) 714-6942",type:"Local",available:true,forwarding:false,ivr:"Thank you for calling ATRIO Health Plans Transportation Services. For English, press 1. Para español, oprima el número 2. If you are experiencing a medical emergency, please hang up and dial 911. Calls may be monitored or recorded for quality assurance purposes. If you are calling to schedule a ride, press 1. If you are calling for ride assistance, press 2.",notes:"Welcome to Atrio Health, transportation provided by MediDrive. Press 1 for English, press 2 for Spanish. Open for reservations Monday–Friday, 6:00 AM to 5:00 PM PST."},
+  {id:12,clientId:3,label:"Facility Line",number:"(503) 389-8465",type:"Local",available:true,forwarding:false,ivr:"Thank you for calling the MediDrive Facility Line. If you are experiencing a medical emergency, please hang up and dial 911. Facilities can schedule transportation through the MediDrive Facility Portal. To request access, please visit facility.medidrive.com. Once registered, you can schedule transportation for members' upcoming appointments. Please stay on the line for the next available representative. All calls are monitored and recorded for quality assurance purposes.",notes:""},
+
+  {id:13,clientId:4,label:"HFCO General",number:"(855) 489-4999",type:"Toll-Free",available:true,forwarding:false,ivr:"",notes:""},
+  {id:14,clientId:4,label:"Book a Ride — Denver",number:"(303) 398-2155",type:"Local",available:true,forwarding:false,ivr:"",notes:"Local book a ride number ported from Transdev"},
+  {id:15,clientId:4,label:"Book a Ride — Ft Collins",number:"(970) 225-4850",type:"Local",available:true,forwarding:false,ivr:"",notes:"Local book a ride number ported from Transdev"},
+  {id:16,clientId:4,label:"Book a Ride — Colorado Springs",number:"(719) 766-4660",type:"Local",available:true,forwarding:false,ivr:"",notes:"Local book a ride number ported from Transdev"},
+  {id:17,clientId:4,label:"HFCO Facility",number:"(720) 452-3025",type:"Local",available:true,forwarding:false,ivr:"",notes:""},
+  {id:18,clientId:4,label:"HFCO Dispatch",number:"(720) 844-9615",type:"Local",available:true,forwarding:false,ivr:"",notes:""},
+  {id:19,clientId:4,label:"HFCO Claims",number:"(720) 844-9610",type:"Local",available:true,forwarding:false,ivr:"",notes:""}
 ];
 
-let clients = [], lines = [], requests = [];
-
-// ── JSONBin sync ──
-function setSyncStatus(status, label){
-  const dot = document.getElementById('sync-dot');
-  const lbl = document.getElementById('sync-label');
-  dot.className = 'sync-dot ' + status;
-  lbl.textContent = label;
-}
-
-async function loadFromBin(){
-  try {
-    const res = await fetch(BIN_URL+'/latest', {headers:{'X-Master-Key':API_KEY}});
-    const json = await res.json();
-    const data = json.record;
-    clients  = data.clients  && data.clients.length  ? data.clients  : DEFAULT_CLIENTS;
-    lines    = data.lines    && data.lines.length    ? data.lines    : DEFAULT_LINES;
-    requests = data.requests || [];
-    PASSWORDS = data.passwords || PASSWORDS;
-    // If bin was empty seed it now
-    if(!data.clients || !data.clients.length) await saveToBin();
-  } catch(e) {
-    clients = DEFAULT_CLIENTS; lines = DEFAULT_LINES; requests = [];
-    setSyncStatus('error','Offline — changes not saved');
-  }
-}
-
-async function saveToBin(){
-  setSyncStatus('saving','Saving…');
-  try {
-    await fetch(BIN_URL, {
-      method:'PUT',
-      headers:HEADERS,
-      body:JSON.stringify({clients, lines, requests, passwords:PASSWORDS})
-    });
-    setSyncStatus('saved','Saved');
-    setTimeout(()=>setSyncStatus('','Synced'), 2000);
-  } catch(e) {
-    setSyncStatus('error','Save failed — retrying…');
-    setTimeout(saveToBin, 4000);
-  }
-}
-
-function scheduleSave(){
-  clearTimeout(saveTimer);
-  saveTimer = setTimeout(saveToBin, 800);
-}
-
-// ── Init ──
-async function init(){
-  await loadFromBin();
-  document.getElementById('loading-screen').classList.add('hidden');
-  document.getElementById('login-screen').classList.remove('hidden');
-}
-init();
-
-// ── Helpers ──
 function nextId(arr){return arr.length?Math.max(...arr.map(e=>e.id))+1:1}
 function initials(name){return name.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase()}
 function avatarStyle(id){const[bg,color]=avatarPalettes[id%avatarPalettes.length];return`background:${bg};color:${color}`}
-function formatPhone(input){let v=input.value.replace(/\D/g,'');if(!v.length){input.value='';return}if(v.length<=3)input.value='('+v;else if(v.length<=6)input.value='('+v.slice(0,3)+') '+v.slice(3);else input.value='('+v.slice(0,3)+') '+v.slice(3,6)+'-'+v.slice(6,10)}
-function updateReqBadge(){const p=requests.filter(r=>r.status==='pending').length;const b=document.getElementById('req-badge');if(p>0){b.textContent=p;b.classList.remove('hidden')}else b.classList.add('hidden')}
 
 // ── Auth ──
 function doLogin(){
   const pw=document.getElementById('pw-input').value;
   if(pw===PASSWORDS.admin){currentRole='admin';startApp();}
   else if(pw===PASSWORDS.viewer){currentRole='viewer';startApp();}
-  else{document.getElementById('login-error').textContent='Incorrect password.';document.getElementById('pw-input').value='';}
+  else{document.getElementById('login-error').textContent='Incorrect password. Please try again.';document.getElementById('pw-input').value='';}
 }
 function startApp(){
   document.getElementById('login-screen').classList.add('hidden');
@@ -475,7 +384,8 @@ function render(){
     const cl=lines.filter(l=>l.clientId===c.id);
     const nm=c.name.toLowerCase().includes(q)||(c.region||'').toLowerCase().includes(q);
     const lm=cl.some(l=>l.number.includes(q)||l.label.toLowerCase().includes(q)||(l.notes||'').toLowerCase().includes(q));
-    return (nm||lm)&&(!ft||cl.some(l=>l.type===ft));
+    const tm=!ft||cl.some(l=>l.type===ft);
+    return (nm||lm)&&tm;
   });
   const tf=lines.filter(l=>l.type==='Toll-Free').length;
   const loc=lines.filter(l=>l.type==='Local').length;
@@ -502,8 +412,8 @@ function render(){
         </div>
         <div class="client-right">
           <span class="line-count">${cl.length} line${cl.length!==1?'s':''}</span>
-          ${isAdmin?`<button class="icon-btn" onclick="event.stopPropagation();openClientModal(${c.id})"><i class="ti ti-edit"></i></button>`:''}
-          <i class="ti ti-chevron-down chevron ${isOpen?'open':''}"></i>
+          ${isAdmin?`<button class="icon-btn" onclick="event.stopPropagation();openClientModal(${c.id})" aria-label="Edit client"><i class="ti ti-edit"></i></button>`:''}
+          <i class="ti ti-chevron-down chevron ${isOpen?'open':''}" aria-hidden="true"></i>
         </div>
       </div>
       ${isOpen?`<div class="lines-body">
@@ -517,9 +427,9 @@ function render(){
             <span class="flag ${l.forwarding?'flag-on':'flag-off'}"><i class="ti ti-${l.forwarding?'phone-forwarded':'phone'}" style="font-size:12px"></i>${l.forwarding?'Forwarding':'No forward'}</span>
           </div>
           <div>${l.ivr?`<div class="ivr-text" id="ivr-${l.id}">${l.ivr}</div><span class="expand-link" onclick="toggleIVR(${l.id})">Show more</span>`:'<span style="color:var(--text3);font-size:12px">—</span>'}</div>
-          <div>${l.ivrlink?`<a href="${l.ivrlink}" target="_blank" rel="noopener" style="font-size:12px;color:#185FA5;display:inline-flex;align-items:center;gap:4px"><i class="ti ti-external-link" style="font-size:13px"></i>Open file</a>`:'<span style="color:var(--text3);font-size:12px">—</span>'}</div>
+          <div>${l.ivrlink?`<a href="${l.ivrlink}" target="_blank" rel="noopener" style="font-size:12px;color:#185FA5;display:inline-flex;align-items:center;gap:4px;word-break:break-all"><i class="ti ti-external-link" style="font-size:13px;flex-shrink:0"></i>Open file</a>`:'<span style="color:var(--text3);font-size:12px">—</span>'}</div>
           <div class="notes-text">${l.notes||'<span style="color:var(--text3)">—</span>'}</div>
-          <div>${isAdmin?`<button class="icon-btn" onclick="openLineModal(${l.id})"><i class="ti ti-edit"></i></button>`:''}</div>
+          <div>${isAdmin?`<button class="icon-btn" onclick="openLineModal(${l.id})" aria-label="Edit line"><i class="ti ti-edit"></i></button>`:''}</div>
         </div>`).join('')}
         ${isAdmin?`<div class="add-line-row" onclick="openLineModal(null,${c.id})"><i class="ti ti-plus" style="font-size:14px"></i> Add line to ${c.name}</div>`:''}
       </div>`:''}
@@ -527,11 +437,18 @@ function render(){
   }).join('');
 }
 
-function toggleExpand(id){expanded[id]=expanded[id]===false?true:false;render()}
-function toggleIVR(id){const el=document.getElementById('ivr-'+id);const lk=el.nextElementSibling;el.classList.toggle('expanded');lk.textContent=el.classList.contains('expanded')?'Show less':'Show more'}
+function toggleExpand(id){expanded[id]=expanded[id]===false?true:false;render();}
+function toggleIVR(id){
+  const el=document.getElementById('ivr-'+id);
+  const lk=el.nextElementSibling;
+  el.classList.toggle('expanded');
+  lk.textContent=el.classList.contains('expanded')?'Show less':'Show more';
+}
 
-// ── Line modal ──
-function populateClientSelect(selectedId){document.getElementById('lf-client').innerHTML=clients.map(c=>`<option value="${c.id}" ${c.id===selectedId?'selected':''}>${c.name}</option>`).join('')}
+// ── Modals ──
+function populateClientSelect(selectedId){
+  document.getElementById('lf-client').innerHTML=clients.map(c=>`<option value="${c.id}" ${c.id===selectedId?'selected':''}>${c.name}</option>`).join('');
+}
 function openLineModal(id,defaultClientId){
   if(currentRole!=='admin')return;
   editLineId=id;
@@ -562,24 +479,6 @@ function openLineModal(id,defaultClientId){
   document.getElementById('line-overlay').classList.remove('hidden');
   setTimeout(()=>document.getElementById('lf-label').focus(),50);
 }
-function saveLine(){
-  const label=document.getElementById('lf-label').value.trim();
-  const number=document.getElementById('lf-number').value.trim();
-  if(!label||!number){alert('Line label and phone number are required.');return;}
-  const clientId=parseInt(document.getElementById('lf-client').value);
-  const data={clientId,label,number,type:document.getElementById('lf-type').value,available:document.getElementById('lf-available').checked,forwarding:document.getElementById('lf-forwarding').checked,ivr:document.getElementById('lf-ivr').value.trim(),ivrlink:document.getElementById('lf-ivrlink').value.trim(),notes:document.getElementById('lf-notes').value.trim()};
-  if(editLineId){const i=lines.findIndex(l=>l.id===editLineId);lines[i]={...data,id:editLineId};}
-  else lines.push({...data,id:nextId(lines)});
-  expanded[clientId]=true;
-  closeModal('line-overlay');render();scheduleSave();
-}
-function deleteLine(){
-  if(!confirm('Delete this line?'))return;
-  lines=lines.filter(l=>l.id!==editLineId);
-  closeModal('line-overlay');render();scheduleSave();
-}
-
-// ── Client modal ──
 function openClientModal(id){
   if(currentRole!=='admin')return;
   editClientId=id||null;
@@ -601,23 +500,43 @@ function openClientModal(id){
   document.getElementById('client-overlay').classList.remove('hidden');
   setTimeout(()=>document.getElementById('cf-name').focus(),50);
 }
+function openSettings(){
+  ['s-current','s-new-admin','s-new-viewer'].forEach(i=>document.getElementById(i).value='');
+  document.getElementById('settings-overlay').classList.remove('hidden');
+}
+function closeModal(id){document.getElementById(id).classList.add('hidden');}
+function overlayClick(e,id){if(e.target===document.getElementById(id))closeModal(id);}
+
+function saveLine(){
+  const label=document.getElementById('lf-label').value.trim();
+  const number=document.getElementById('lf-number').value.trim();
+  if(!label||!number){alert('Line label and phone number are required.');return;}
+  const clientId=parseInt(document.getElementById('lf-client').value);
+  const data={clientId,label,number,type:document.getElementById('lf-type').value,available:document.getElementById('lf-available').checked,forwarding:document.getElementById('lf-forwarding').checked,ivr:document.getElementById('lf-ivr').value.trim(),ivrlink:document.getElementById('lf-ivrlink').value.trim(),notes:document.getElementById('lf-notes').value.trim()};
+  if(editLineId){const i=lines.findIndex(l=>l.id===editLineId);lines[i]={...data,id:editLineId};}
+  else lines.push({...data,id:nextId(lines)});
+  expanded[clientId]=true;
+  closeModal('line-overlay');render();
+}
+function deleteLine(){
+  if(!confirm('Delete this line?'))return;
+  lines=lines.filter(l=>l.id!==editLineId);
+  closeModal('line-overlay');render();
+}
 function saveClient(){
   const name=document.getElementById('cf-name').value.trim();
   if(!name){alert('Client name is required.');return;}
   const data={name,region:document.getElementById('cf-region').value.trim(),notes:document.getElementById('cf-notes').value.trim()};
   if(editClientId){const i=clients.findIndex(c=>c.id===editClientId);clients[i]={...data,id:editClientId};}
   else{const newId=nextId(clients);clients.push({...data,id:newId});expanded[newId]=true;}
-  closeModal('client-overlay');render();scheduleSave();
+  closeModal('client-overlay');render();
 }
 function deleteClient(){
   if(lines.some(l=>l.clientId===editClientId)){alert('Remove all lines for this client first.');return;}
   if(!confirm('Delete this client?'))return;
   clients=clients.filter(c=>c.id!==editClientId);
-  closeModal('client-overlay');render();scheduleSave();
+  closeModal('client-overlay');render();
 }
-
-// ── Settings ──
-function openSettings(){['s-current','s-new-admin','s-new-viewer'].forEach(i=>document.getElementById(i).value='');document.getElementById('settings-overlay').classList.remove('hidden');}
 function saveSettings(){
   const current=document.getElementById('s-current').value;
   if(current!==PASSWORDS.admin){alert('Current admin password is incorrect.');return;}
@@ -625,9 +544,8 @@ function saveSettings(){
   const nv=document.getElementById('s-new-viewer').value;
   if(na)PASSWORDS.admin=na;
   if(nv)PASSWORDS.viewer=nv;
+  alert('Passwords updated for this session.\n\nTo make permanent: use Export to download the updated file, then re-upload to SharePoint.');
   closeModal('settings-overlay');
-  scheduleSave();
-  alert('Passwords updated and saved.');
 }
 
 // ── Request queue ──
@@ -640,6 +558,7 @@ function openRequestModal(){
   document.getElementById('request-overlay').classList.remove('hidden');
   setTimeout(()=>document.getElementById('rq-name').focus(),50);
 }
+
 function submitRequest(){
   const name=document.getElementById('rq-name').value.trim();
   const clientId=document.getElementById('rq-client').value;
@@ -647,12 +566,26 @@ function submitRequest(){
   const reason=document.getElementById('rq-reason').value.trim();
   if(!name||!clientId||!label||!reason){alert('Please fill in all required fields.');return;}
   const clientName=clients.find(c=>c.id==clientId)?.name||'Unknown';
-  requests.push({id:nextId(requests),submittedBy:name,clientId:parseInt(clientId),clientName,label,type:document.getElementById('rq-type').value,areaCode:document.getElementById('rq-area').value.trim(),reason,urgency:document.getElementById('rq-urgency').value,notes:document.getElementById('rq-notes').value.trim(),status:'pending',adminNotes:'',submittedAt:new Date().toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'})});
-  closeModal('request-overlay');
-  scheduleSave();
+  requests.push({
+    id:nextId(requests),
+    submittedBy:name,
+    clientId:parseInt(clientId),
+    clientName,
+    label,
+    type:document.getElementById('rq-type').value,
+    areaCode:document.getElementById('rq-area').value.trim(),
+    reason,
+    urgency:document.getElementById('rq-urgency').value,
+    notes:document.getElementById('rq-notes').value.trim(),
+    status:'pending',
+    adminNotes:'',
+    submittedAt:new Date().toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'})
+  });
   updateReqBadge();
-  alert('Request submitted! An admin will review it shortly.');
+  closeModal('request-overlay');
+  alert('Your request has been submitted! An admin will review it shortly.');
 }
+
 function openQueue(){
   activeQTab='pending';
   document.querySelectorAll('.qtab').forEach(t=>t.classList.remove('active'));
@@ -660,54 +593,82 @@ function openQueue(){
   renderQueue();
   document.getElementById('queue-overlay').classList.remove('hidden');
 }
-function switchQTab(tab){activeQTab=tab;document.querySelectorAll('.qtab').forEach(t=>t.classList.remove('active'));document.getElementById('qtab-'+tab).classList.add('active');renderQueue()}
+
+function switchQTab(tab){
+  activeQTab=tab;
+  document.querySelectorAll('.qtab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('qtab-'+tab).classList.add('active');
+  renderQueue();
+}
+
 function renderQueue(){
   const filtered=activeQTab==='all'?requests:requests.filter(r=>r.status===activeQTab);
   const pendingCount=requests.filter(r=>r.status==='pending').length;
   document.getElementById('pending-count').textContent=pendingCount>0?`(${pendingCount})`:'';
-  const sc={pending:'qs-pending',approved:'qs-approved',declined:'qs-declined'};
-  const sl={pending:'Pending',approved:'Approved',declined:'Declined'};
-  const uc={Normal:'color:var(--text2)',Urgent:'color:#854F0B',Critical:'color:#A32D2D'};
-  if(!filtered.length){document.getElementById('queue-list').innerHTML='<div class="queue-empty"><i class="ti ti-inbox" style="font-size:32px;display:block;margin-bottom:8px"></i>No requests in this category</div>';return;}
+  if(!filtered.length){
+    document.getElementById('queue-list').innerHTML='<div class="queue-empty"><i class="ti ti-inbox" style="font-size:32px;display:block;margin-bottom:8px"></i>No requests in this category</div>';
+    return;
+  }
+  const statusLabel={pending:'Pending',approved:'Approved',declined:'Declined'};
+  const statusClass={pending:'qs-pending',approved:'qs-approved',declined:'qs-declined'};
   document.getElementById('queue-list').innerHTML=[...filtered].reverse().map(r=>`
     <div class="qitem">
       <div>
         <div class="qitem-title">${r.label} <span style="font-weight:400;color:var(--text2)">— ${r.clientName}</span></div>
         <div class="qitem-meta">
-          <span style="${uc[r.urgency]}">${r.urgency}</span> &nbsp;·&nbsp; <b>${r.type}</b>${r.areaCode?' (area: '+r.areaCode+')':''}
-          &nbsp;·&nbsp; By <b>${r.submittedBy}</b> &nbsp;·&nbsp; ${r.submittedAt}<br>
+          <span style="${urgencyColor[r.urgency]}"><i class="ti ${urgencyIcon[r.urgency]}" style="font-size:11px"></i> ${r.urgency}</span>
+          &nbsp;·&nbsp; <b>${r.type}</b>${r.areaCode?' (area: '+r.areaCode+')':''}
+          &nbsp;·&nbsp; Requested by <b>${r.submittedBy}</b>
+          &nbsp;·&nbsp; ${r.submittedAt}<br>
           <span style="color:var(--text)">${r.reason}</span>
-          ${r.notes?`<br><span style="color:var(--text3)">${r.notes}</span>`:''}
+          ${r.notes?`<br><span style="color:var(--text3)">Notes: ${r.notes}</span>`:''}
           ${r.adminNotes?`<br><span style="color:#185FA5"><i class="ti ti-message" style="font-size:11px"></i> Admin: ${r.adminNotes}</span>`:''}
         </div>
       </div>
       <div class="qitem-actions">
-        <span class="qstatus ${sc[r.status]}">${sl[r.status]}</span>
+        <span class="qstatus ${statusClass[r.status]}">${statusLabel[r.status]}</span>
         ${r.status==='pending'?`<button class="btn-approve" onclick="openReply(${r.id},'approved')">Approve</button><button class="btn-decline" onclick="openReply(${r.id},'declined')">Decline</button>`:''}
         ${r.status!=='pending'?`<button class="icon-btn" onclick="openReply(${r.id},'reopen')" title="Reopen"><i class="ti ti-refresh"></i></button>`:''}
       </div>
-    </div>`).join('');
+    </div>
+  `).join('');
 }
-function openReply(id,action){
+
+function openReply(id, action){
   replyRequestId=id;
   const r=requests.find(x=>x.id===id);
   document.getElementById('reply-modal-title').textContent=action==='reopen'?'Reopen request':action==='approved'?'Approve request':'Decline request';
   document.getElementById('reply-notes').value=r.adminNotes||'';
-  document.getElementById('reply-summary').innerHTML=`<b>${r.label}</b> for <b>${r.clientName}</b><br>By ${r.submittedBy} · ${r.submittedAt}<br>${r.reason}`;
+  document.getElementById('reply-summary').innerHTML=`<b>${r.label}</b> for <b>${r.clientName}</b><br>Requested by ${r.submittedBy} · ${r.submittedAt}<br>${r.reason}`;
   document.getElementById('reply-approve-btn').style.display=action==='declined'?'none':'inline-flex';
   document.getElementById('reply-decline-btn').style.display=action==='approved'?'none':'inline-flex';
-  if(action==='reopen'){document.getElementById('reply-approve-btn').style.display='inline-flex';document.getElementById('reply-decline-btn').style.display='inline-flex';}
+  if(action==='reopen'){
+    document.getElementById('reply-approve-btn').style.display='inline-flex';
+    document.getElementById('reply-decline-btn').style.display='inline-flex';
+  }
   document.getElementById('reply-overlay').classList.remove('hidden');
 }
+
 function resolveRequest(status){
   const i=requests.findIndex(r=>r.id===replyRequestId);
-  if(i>-1){requests[i].status=status;requests[i].adminNotes=document.getElementById('reply-notes').value.trim();}
-  updateReqBadge();closeModal('reply-overlay');renderQueue();scheduleSave();
+  if(i>-1){
+    requests[i].status=status;
+    requests[i].adminNotes=document.getElementById('reply-notes').value.trim();
+  }
+  updateReqBadge();
+  closeModal('reply-overlay');
+  renderQueue();
 }
 
-// ── Shared ──
-function closeModal(id){document.getElementById(id).classList.add('hidden')}
-function overlayClick(e,id){if(e.target===document.getElementById(id))closeModal(id)}
+function exportRequests(){
+  const rows=[['ID','Submitted By','Client','Line Label','Type','Area Code','Urgency','Reason','Notes','Status','Admin Notes','Submitted At']];
+  requests.forEach(r=>rows.push([r.id,r.submittedBy,r.clientName,r.label,r.type,r.areaCode||'',r.urgency,r.reason,r.notes||'',r.status,r.adminNotes||'',r.submittedAt]));
+  const csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download='MediDrive_LineRequests_'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
+}
 
 function exportCSV(){
   const rows=[['Client','Region','Line Label','Type','Number','Available','Forwarding','IVR Message','IVR Link','Notes']];
@@ -717,14 +678,84 @@ function exportCSV(){
     else cl.forEach(l=>rows.push([c.name,c.region||'',l.label,l.type,l.number,l.available?'Yes':'No',l.forwarding?'Yes':'No',l.ivr||'',l.ivrlink||'',l.notes||'']));
   });
   const csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
-  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='MediDrive_Directory_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
-}
-function exportRequests(){
-  const rows=[['ID','Submitted By','Client','Line Label','Type','Area Code','Urgency','Reason','Notes','Status','Admin Notes','Submitted At']];
-  requests.forEach(r=>rows.push([r.id,r.submittedBy,r.clientName,r.label,r.type,r.areaCode||'',r.urgency,r.reason,r.notes||'',r.status,r.adminNotes||'',r.submittedAt]));
-  const csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
-  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='MediDrive_Requests_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download='MediDrive_Directory_'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
 }
 </script>
+<!-- Request a Line Modal (Viewer) -->
+<div class="overlay hidden" id="request-overlay" onclick="overlayClick(event,'request-overlay')">
+  <div class="modal modal-wide" role="dialog" aria-modal="true">
+    <div class="modal-head">
+      <h2><i class="ti ti-phone-plus" style="font-size:15px;vertical-align:-2px;margin-right:6px;color:#185FA5"></i>Request a new telephone line</h2>
+      <button class="icon-btn" onclick="closeModal('request-overlay')" aria-label="Close"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="field"><label>Your name *</label><input id="rq-name" type="text" placeholder="First and last name"></div>
+      <div class="field"><label>Client / account this line is for *</label><select id="rq-client"><option value="">— Select client —</option></select></div>
+      <div class="field"><label>Line label / purpose *</label><input id="rq-label" type="text" placeholder="e.g. Medicaid scheduling, Dispatch overflow"></div>
+      <div class="field">
+        <label>Preferred number type</label>
+        <select id="rq-type"><option value="Toll-Free">Toll-Free</option><option value="Local">Local</option><option value="Either">No preference</option></select>
+      </div>
+      <div class="field"><label>Preferred area code (if local)</label><input id="rq-area" type="text" placeholder="e.g. 703, 303" maxlength="3" oninput="this.value=this.value.replace(/\D/g,'')"></div>
+      <div class="field"><label>Business justification *</label><textarea id="rq-reason" placeholder="Why is this line needed? What call volume is expected? Any routing requirements?"></textarea></div>
+      <div class="field"><label>Urgency</label>
+        <select id="rq-urgency">
+          <option value="Normal">Normal — within 2 weeks</option>
+          <option value="Urgent">Urgent — within 3 days</option>
+          <option value="Critical">Critical — ASAP</option>
+        </select>
+      </div>
+      <div class="field"><label>Additional notes</label><textarea id="rq-notes" placeholder="Any other details, IVR requirements, forwarding needs…" style="min-height:70px"></textarea></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" onclick="closeModal('request-overlay')">Cancel</button>
+      <button class="btn btn-primary" onclick="submitRequest()"><i class="ti ti-send"></i> Submit request</button>
+    </div>
+  </div>
+</div>
+
+<!-- Request Queue Modal (Admin) -->
+<div class="overlay hidden" id="queue-overlay" onclick="overlayClick(event,'queue-overlay')">
+  <div class="modal modal-wide" role="dialog" aria-modal="true">
+    <div class="modal-head">
+      <h2><i class="ti ti-list-check" style="font-size:15px;vertical-align:-2px;margin-right:6px;color:#185FA5"></i>Line Request Queue</h2>
+      <button class="icon-btn" onclick="closeModal('queue-overlay')" aria-label="Close"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="queue-tabs">
+      <button class="qtab active" id="qtab-pending" onclick="switchQTab('pending')">Pending <span id="pending-count"></span></button>
+      <button class="qtab" id="qtab-approved" onclick="switchQTab('approved')">Approved</button>
+      <button class="qtab" id="qtab-declined" onclick="switchQTab('declined')">Declined</button>
+      <button class="qtab" id="qtab-all" onclick="switchQTab('all')">All</button>
+    </div>
+    <div class="queue-list" id="queue-list"></div>
+    <div class="modal-foot" style="justify-content:space-between">
+      <button class="btn" onclick="exportRequests()"><i class="ti ti-download"></i> Export requests</button>
+      <button class="btn" onclick="closeModal('queue-overlay')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Admin reply modal -->
+<div class="overlay hidden" id="reply-overlay" onclick="overlayClick(event,'reply-overlay')">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-head">
+      <h2 id="reply-modal-title">Respond to request</h2>
+      <button class="icon-btn" onclick="closeModal('reply-overlay')" aria-label="Close"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div id="reply-summary" style="background:var(--bg2);border-radius:var(--radius);padding:12px;margin-bottom:1rem;font-size:13px;color:var(--text2);line-height:1.7"></div>
+      <div class="field"><label>Admin notes / response</label><textarea id="reply-notes" placeholder="Add a note to the requester, or internal notes for the team…" style="min-height:80px"></textarea></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" onclick="closeModal('reply-overlay')">Cancel</button>
+      <button class="btn btn-decline" id="reply-decline-btn" onclick="resolveRequest('declined')"><i class="ti ti-x"></i> Decline</button>
+      <button class="btn btn-approve" id="reply-approve-btn" onclick="resolveRequest('approved')"><i class="ti ti-check"></i> Approve</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
