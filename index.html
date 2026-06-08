@@ -394,30 +394,26 @@ function showApp(){
 }
 
 async function loadFromBin(){
-  const timeout = new Promise(resolve => setTimeout(() => resolve(null), 5000));
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 4000);
   try {
-    const fetchPromise = fetch(BIN_URL, {
-      method: 'GET',
-      mode: 'cors'
-    }).then(r => r.json());
-
-    const data = await Promise.race([fetchPromise, timeout]);
-
+    const res = await fetch(BIN_URL, { signal: controller.signal, mode: 'cors' });
+    clearTimeout(timer);
+    const data = await res.json();
     if(data && data.clients){
       clients   = data.clients.length   ? data.clients   : DEFAULT_CLIENTS;
-      lines     = data.lines.length     ? data.lines     : DEFAULT_LINES;
+      lines     = data.lines && data.lines.length ? data.lines : DEFAULT_LINES;
       requests  = data.requests  || [];
       PASSWORDS = data.passwords || PASSWORDS;
       setSyncStatus('saved', 'Synced');
       if(!data.clients.length) scheduleSave();
     } else {
-      clients = DEFAULT_CLIENTS; lines = DEFAULT_LINES; requests = [];
-      setSyncStatus('error', 'Could not reach server — using local data');
-      scheduleSave();
+      throw new Error('Empty');
     }
   } catch(e) {
+    clearTimeout(timer);
     clients = DEFAULT_CLIENTS; lines = DEFAULT_LINES; requests = [];
-    setSyncStatus('error', 'Offline — using local data');
+    setSyncStatus('error', e.name==='AbortError' ? 'Sync timeout — offline mode' : 'Offline — using local data');
   }
 }
 
@@ -449,7 +445,10 @@ function scheduleSave(){
 
 // ── Init ──
 async function init(){
-  await loadFromBin();
+  const hardCap = new Promise(resolve => setTimeout(resolve, 4500));
+  await Promise.race([loadFromBin(), hardCap]);
+  // Ensure defaults if something slipped through
+  if(!clients.length){ clients = DEFAULT_CLIENTS; lines = DEFAULT_LINES; requests = []; }
   showApp();
 }
 init();
