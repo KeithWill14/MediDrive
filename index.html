@@ -333,9 +333,9 @@
 </div>
 
 <script>
-// ── npoint.io config ──
-const BIN_URL  = 'https://api.npoint.io/dd7e237d46b676e6fcee';
-const HEADERS  = {'Content-Type':'application/json'};
+// ── Google Apps Script config ──
+const BIN_URL  = 'https://script.google.com/macros/s/AKfycbx9hXzxdQTzWMAqg6UZ3a2WrTpft65VUXhuYZK_pFTTsskCwCpWvVNkoT5ge7wxezwaAw/exec';
+const HEADERS  = {'Content-Type':'text/plain'};
 
 // ── Passwords ──
 let PASSWORDS = { admin: 'MediDrive2025!', viewer: 'MDViewer2025' };
@@ -395,11 +395,15 @@ function showApp(){
 
 async function loadFromBin(){
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 6000);
+  const timer = setTimeout(() => controller.abort(), 8000);
   try {
-    const res = await fetch(BIN_URL, { signal: controller.signal, mode: 'cors' });
+    const res = await fetch(BIN_URL, {
+      signal: controller.signal,
+      redirect: 'follow'
+    });
     clearTimeout(timer);
-    const data = await res.json();
+    const text = await res.text();
+    const data = JSON.parse(text);
     if(data && data.clients){
       clients   = data.clients.length   ? data.clients   : DEFAULT_CLIENTS;
       lines     = data.lines && data.lines.length ? data.lines : DEFAULT_LINES;
@@ -415,7 +419,6 @@ async function loadFromBin(){
     clients = DEFAULT_CLIENTS; lines = DEFAULT_LINES; requests = [];
     setSyncStatus('error', e.name==='AbortError' ? 'Sync timeout — offline mode' : 'Offline — using local data');
   }
-  // Re-render if already logged in
   if(currentRole) render();
 }
 
@@ -425,14 +428,14 @@ async function saveToBin(){
     const res = await fetch(BIN_URL, {
       method: 'POST',
       headers: HEADERS,
-      mode: 'cors',
-      body: JSON.stringify({ clients, lines, requests, passwords: PASSWORDS })
+      body: JSON.stringify({ clients, lines, requests, passwords: PASSWORDS }),
+      redirect: 'follow'
     });
     if(res.ok){
       setSyncStatus('saved', 'Saved');
       setTimeout(() => setSyncStatus('saved', 'Synced'), 2000);
     } else {
-      throw new Error('Non-OK response');
+      throw new Error('Non-OK');
     }
   } catch(e) {
     setSyncStatus('error', 'Save failed — will retry');
