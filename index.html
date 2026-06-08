@@ -471,11 +471,11 @@ function scheduleSave(){
 
 // ── Init ──
 function init(){
-  // Show login immediately — never wait on network
+  // Show login immediately — no network wait
   clients = DEFAULT_CLIENTS; lines = DEFAULT_LINES; requests = [];
   document.getElementById('loading-screen').classList.add('hidden');
   document.getElementById('login-screen').classList.remove('hidden');
-  // Load from bin in background after login screen is visible
+  // Load live data in background
   loadFromBin();
 }
 init();
