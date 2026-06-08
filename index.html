@@ -337,12 +337,22 @@
 const BIN_URL  = 'https://script.google.com/macros/s/AKfycbx9hXzxdQTzWMAqg6UZ3a2WrTpft65VUXhuYZK_pFTTsskCwCpWvVNkoT5ge7wxezwaAw/exec';
 const HEADERS  = {'Content-Type':'text/plain'};
 
-// ── Passwords ──
-let PASSWORDS = { admin: 'MediDrive2025!', viewer: 'MDViewer2025' };
+// ── Passwords (stored as SHA-256 hashes) ──
+// Default hashes for: admin='MediDrive2025!'  viewer='MDViewer2025'
+let PASSWORDS = {
+  admin:  'deb8a656d4bc01e2288ea31175f33f7361351ab32fc635427496843288ce1840',
+  viewer: 'e7b645ad3640890afa66d42b58d960b2af137cb233211b05fdc2f5646350f91e'
+};
 let currentRole = null;
 let editLineId = null, editClientId = null, replyRequestId = null;
 let expanded = {}, activeQTab = 'pending';
 let saveTimer = null;
+
+// ── SHA-256 hash helper ──
+async function sha256(str){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
 
 const avatarPalettes = [
   ['#E6F1FB','#185FA5'],['#E1F5EE','#0F6E56'],['#FAEEDA','#854F0B'],
@@ -408,7 +418,18 @@ async function loadFromBin(){
       clients   = data.clients.length   ? data.clients   : DEFAULT_CLIENTS;
       lines     = data.lines && data.lines.length ? data.lines : DEFAULT_LINES;
       requests  = data.requests  || [];
-      PASSWORDS = data.passwords || PASSWORDS;
+      // If passwords from sheet are plain text (legacy), hash them and resave
+      if(data.passwords){
+        const p = data.passwords;
+        const looksHashed = (s) => s && s.length === 64 && /^[a-f0-9]+$/.test(s);
+        if(!looksHashed(p.admin)){
+          PASSWORDS.admin  = await sha256(p.admin);
+          PASSWORDS.viewer = await sha256(p.viewer);
+          scheduleSave();
+        } else {
+          PASSWORDS = p;
+        }
+      }
       setSyncStatus('saved', 'Synced');
       if(!data.clients.length) scheduleSave();
     } else {
@@ -467,10 +488,11 @@ function formatPhone(input){let v=input.value.replace(/\D/g,'');if(!v.length){in
 function updateReqBadge(){const p=requests.filter(r=>r.status==='pending').length;const b=document.getElementById('req-badge');if(p>0){b.textContent=p;b.classList.remove('hidden')}else b.classList.add('hidden')}
 
 // ── Auth ──
-function doLogin(){
-  const pw=document.getElementById('pw-input').value;
-  if(pw===PASSWORDS.admin){currentRole='admin';startApp();}
-  else if(pw===PASSWORDS.viewer){currentRole='viewer';startApp();}
+async function doLogin(){
+  const pw = document.getElementById('pw-input').value;
+  const hashed = await sha256(pw);
+  if(hashed === PASSWORDS.admin){currentRole='admin';startApp();}
+  else if(hashed === PASSWORDS.viewer){currentRole='viewer';startApp();}
   else{document.getElementById('login-error').textContent='Incorrect password.';document.getElementById('pw-input').value='';}
 }
 function startApp(){
@@ -641,13 +663,14 @@ function deleteClient(){
 
 // ── Settings ──
 function openSettings(){['s-current','s-new-admin','s-new-viewer'].forEach(i=>document.getElementById(i).value='');document.getElementById('settings-overlay').classList.remove('hidden');}
-function saveSettings(){
-  const current=document.getElementById('s-current').value;
-  if(current!==PASSWORDS.admin){alert('Current admin password is incorrect.');return;}
-  const na=document.getElementById('s-new-admin').value;
-  const nv=document.getElementById('s-new-viewer').value;
-  if(na)PASSWORDS.admin=na;
-  if(nv)PASSWORDS.viewer=nv;
+async function saveSettings(){
+  const current = document.getElementById('s-current').value;
+  const hashedCurrent = await sha256(current);
+  if(hashedCurrent !== PASSWORDS.admin){alert('Current admin password is incorrect.');return;}
+  const na = document.getElementById('s-new-admin').value;
+  const nv = document.getElementById('s-new-viewer').value;
+  if(na) PASSWORDS.admin  = await sha256(na);
+  if(nv) PASSWORDS.viewer = await sha256(nv);
   closeModal('settings-overlay');
   scheduleSave();
   alert('Passwords updated and saved.');
